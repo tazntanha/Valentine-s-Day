@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Proposal ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff0f3;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            transition: background 1s ease-in-out;
+        }
+
+        /* The Heart Shower Effect */
+        .heart-particle {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 { color: #c9184a; font-size: 2rem; }
+        .quote {
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+
+        .details { color: #ff4d6d; font-weight: bold; margin-bottom: 25px; }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #888; color: white; position: relative; }
+
+        /* Background image state */
+        .bg-active {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <audio id="loveSong" src="song.mp3" loop></audio>
+
+    <div class="container" id="mainCard">
+        <h1>Valentine's Day Dinner</h1>
+        
+        <p class="quote">
+            “It was written in our destiny as Allah’s plan to be united, not our choice. 
+            But now, it’s our choice to make it worthwhile.”
+        </p>
+
+        <p>To my wonderful husband, will you join me?</p>
+        
+        <div class="details">
+            📍 Zen Table <br>
+            🕘 9:00 PM
+        </div>
+
+        <div class="btn-group">
+            <button class="btn" id="yesBtn" onclick="acceptInvitation()">Yes, I'd love to!</button>
+            <button class="btn" id="noBtn" onmouseover="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Showering Hearts Logic
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // 2. Playful "No" Button
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        // 3. Acceptance Logic
+        function acceptInvitation() {
+            const body = document.getElementById('body');
+            const music = document.getElementById('loveSong');
+            
+            // Change background to your photo
+            // REPLACE 'YOUR_PHOTO_URL_HERE' with the link to your image
+            body.style.background = "linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('YOUR_PHOTO_URL_HERE')";
+            body.classList.add('bg-active');
+
+            // Play music
+            music.play();
+
+            // Sweet alert or change text
+            document.getElementById('mainCard').innerHTML = `
+                <h1 style="color: #ff4d6d;">Yay! ❤️</h1>
+                <p style="font-size: 1.5rem;">I'll see you at 9 PM at Zen Table. <br> I love you!</p>
+            `;
+        }
+    </script>
+</body>
+</html>
